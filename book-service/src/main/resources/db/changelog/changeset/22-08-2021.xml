@@ -1,0 +1,71 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">
+
+
+    <changeSet id="1" author="dshubin">
+        <createTable tableName="author">
+            <column type="uuid" name="id" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column type="varchar" name="first_name">
+                <constraints nullable="false"/>
+            </column>
+            <column type="varchar" name="last_name">
+                <constraints nullable="false"/>
+            </column>
+            <column type="varchar" name="middle_name">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="dshubin">
+        <createTable tableName="publishing">
+            <column type="uuid" autoIncrement="true" name="id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column type="varchar" name="name">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="dshubin">
+        <createTable tableName="book">
+            <column type="uuid" name="id" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column type="uuid" name="author_id">
+                <constraints references="author(id)"/>
+            </column>
+            <column type="uuid" name="publishing_id">
+                <constraints references="publishing(id)"/>
+            </column>
+            <column type="varchar" name="title">
+                <constraints nullable="false"/>
+            </column>
+            <column type="varchar" name="description"/>
+            <column type="money" name="cost">
+                <constraints nullable="false"/>
+            </column>
+            <column type="uuid" name="currency_id">
+                <constraints nullable="false"/>
+            </column>
+            <column type="uuid" name="created_by">
+                <constraints nullable="false"/>
+            </column>
+            <column type="timestamptz" name="created_at">
+                <constraints nullable="false"/>
+            </column>
+            <column type="timestamptz" name="updated_at">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
